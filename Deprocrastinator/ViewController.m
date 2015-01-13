@@ -8,7 +8,16 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
+@interface ViewController () <UITableViewDataSource, UITableViewDelegate>
+@property (strong, nonatomic) IBOutlet UITextField *textField;
+//TEXT ARRAY
+@property NSMutableArray *toDoListArray;
+
+//TEXT STRINGS
+@property NSString *a;
+@property NSString *b;
+@property NSString *c;
+@property NSString *d;
 
 @end
 
@@ -16,12 +25,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    //self.toDoListArray = [NSMutableArray arrayWithObjects:@"a", ni
+    
+    self.toDoListArray = [NSMutableArray arrayWithObjects: self.a, self.b, self.c, self.d, nil];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 4;
+}
+- (IBAction)onAddButtonPressed:(id)sender
+{
+    
+}
+
+-(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"ColorCellID"];
+    //  cell.textLabel.text = [NSString stringWithFormat:@"row: %li",(long) indexPath.row];
+    
+    self.textField = [self.toDoListArray objectAtIndex:indexPath.row];
+    
+    return cell;
 }
 
 @end
